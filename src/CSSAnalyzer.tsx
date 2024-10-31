@@ -77,6 +77,10 @@ const App = () => {
     e.preventDefault();
   };
 
+  const removeFile = (index) => {
+    setFiles(files.filter((_, i) => i !== index));
+  };
+
   const handleDrop = useCallback((e) => {
     e.preventDefault();
     processUploadedFiles(e.dataTransfer.files);
@@ -195,10 +199,40 @@ const App = () => {
               <h3 className="text-lg font-semibold mb-2">Analyzed Files</h3>
               <div className="space-y-2">
                 {files.map((file, index) => (
-                  <div key={index} className="flex justify-between p-2 bg-gray-50 rounded-md">
-                    <span className="font-mono">{file.name}</span>
-                    <span className="text-gray-500">{file.size} KB</span>
+                 
+                  <div key={index} className="p-2 bg-gray-50 rounded-md">
+                  <div className="flex items-center justify-between">
+                    <div className="font-mono truncate">
+                      {file.source === 'url' ? file.url : file.name}
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-sm text-gray-500">
+                        {file.size} KB
+                      </span>
+                      <button
+                        onClick={() => removeFile(index)}
+                        className="text-red-500 hover:text-red-700 text-sm"
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
+                  {file.source === 'url' && (
+                    <textarea
+                      className="mt-2 w-full h-24 p-2 text-sm border rounded font-mono"
+                      placeholder="Paste the CSS content here..."
+                      value={file.content}
+                      onChange={(e) => {
+                        const updatedFiles = [...files];
+                        updatedFiles[index] = {
+                          ...file,
+                          content: e.target.value
+                        };
+                        setFiles(updatedFiles);
+                      }}
+                    />
+                  )}
+                </div>
                 ))}
               </div>
             </div>
