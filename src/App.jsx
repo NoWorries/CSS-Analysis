@@ -1,10 +1,10 @@
 import "./App.css";
-import ArtifactCode from "./ArtifactCode";
+import CSSAnalyzer from "./CSSAnalyzer";
 
 function App() {
   return (
-    <>
-      <ArtifactCode />
+    <><div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <CSSAnalyzer /></div>
     </>
   );
 }
