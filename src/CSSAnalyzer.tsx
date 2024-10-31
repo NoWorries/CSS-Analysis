@@ -112,7 +112,7 @@ const App = () => {
         <CardTitle>CSS File Analyzer</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
-        <Alert variant="warning" className="mb-4">
+        <Alert variant="warning" className="mb-4"> 
           <AlertTriangle className="h-4 w-4" />
           <AlertTitle>Browser-Only Analysis</AlertTitle>
           <AlertDescription>
